@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ContactoService } from '../../../services/contacto.service';
 
+declare var $:any;
+
 @Component({
   selector: 'app-contacto',
   templateUrl: 'contacto.component.html',
@@ -12,6 +14,7 @@ export class ContactoComponent implements OnInit {
   url:string;
     formularioContacto:FormGroup;
     formularioUpdate:FormGroup;
+    hideModal: boolean= false;
 
  ngOnInit() {
     let validaciones = [
@@ -30,7 +33,7 @@ export class ContactoComponent implements OnInit {
     });
   }
 
-  private actualizarPage() {
+  public actualizarPage() {
     this.contactoService.getContactos().subscribe();
     this.ngOnInit();
   }
@@ -39,8 +42,17 @@ export class ContactoComponent implements OnInit {
     console.log(this.formularioContacto.value);
     this.contactoService.agregarContacto(this.formularioContacto.value)
     this.actualizarPage();
+    $('#modalContacto').modal('hide');
   }
 
+  public editarContacto() {
+    console.log(this.formularioUpdate.value);
+      this.contactoService.editarContacto(this.formularioUpdate, this.url)
+      .subscribe(res => {
+        console.log(res);
+      });
+      this.actualizarPage();
+  }
 
   public eliminar(idContacto:number) {
   this.contactoService.eliminarContacto(idContacto)

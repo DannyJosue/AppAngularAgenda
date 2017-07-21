@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from '../../../services/usuario.service';
 
+declare var $:any;
+
 @Component({
   selector: 'app-usuario',
   templateUrl: 'usuario.component.html',
@@ -10,7 +12,7 @@ import { UsuarioService } from '../../../services/usuario.service';
 export class UsuarioComponent implements OnInit {
   constructor(private usuarioService: UsuarioService) {  }
     nuevoUsuario:FormGroup;
-
+hideModal: boolean= false;
   ngOnInit() {
     let validaciones = [
       Validators.required, Validators.minLength(2)
@@ -30,6 +32,7 @@ export class UsuarioComponent implements OnInit {
     this.usuarioService.agregarUsuario(this.nuevoUsuario.value)
     this.usuarioService.getUsuarios().subscribe();
     this.ngOnInit();
+    $('#modalUsuario').modal('hide');
   }
 
 

@@ -36,23 +36,23 @@ export class ContactoService {
 
   public agregarContacto(contacto:any) {
     let uri = this.uriContacto + 'api/v1/contacto/';
-    let token = localStorage.getItem('token');
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({'headers': headers});
-    headers.append('Authorization', token);
+    
+      let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.usuarioService.getToken()
+    });
+
 
     let data = JSON.stringify(contacto);
 
-    this.http.post(uri, data, options)
+    this.http.post(uri, data, {headers})
     .subscribe( res => {
       console.log(res.json());
       this.getContactos();
     });
   }
 
-
-
-    editarContacto(contacto:any, idContacto:any) {
+  editarContacto(contacto:any, idContacto:any) {
     let uri = `${this.url}/api/v1/contacto/${idContacto}`;
 
     let headers = new Headers({
@@ -68,8 +68,6 @@ export class ContactoService {
     });
   }
 
-
-  
   eliminarContacto(idContacto:number) {
     let uri = `${this.url}/api/v1/contacto/${idContacto}`;
 

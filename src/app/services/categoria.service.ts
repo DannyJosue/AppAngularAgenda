@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsuarioService } from './usuario.service';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -10,7 +11,8 @@ export class CategoriaService {
 
   constructor(
     private http:Http,
-    private router:Router
+    private router:Router,
+    private usuarioService:UsuarioService
   ) {  }
 
   public setCurrentUser(usuario:any) {
@@ -33,14 +35,14 @@ export class CategoriaService {
 
   public agregarCategoria(categoria:any) {
     let uri = this.uriCategoria + 'api/v1/categoria/';
-    let token = localStorage.getItem('token');
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({'headers': headers});
-    headers.append('Authorization', token);
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.usuarioService.getToken()
+    });
 
     let data = JSON.stringify(categoria);
 
-    this.http.post(uri, data, options)
+    this.http.post(uri, data, {headers})
     .subscribe( res => {
       console.log(res.json());
       this.getCategorias();

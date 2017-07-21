@@ -5,11 +5,8 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
-    <div class="form-group">
-      <button onclick="showTable('#tbl');" class="btn btn-success">Mostrar tabla</button><br><br><br>
-    </div>
-    <table class="table table-hover" id="tbl" >
+  <div class="col-md-12">                                                                                                                                                                       <br><br>   
+   <!-- <table class="table table-hover" id="tbl" >
       <thead>
         <tr>
           <th>idContacto</th>
@@ -39,7 +36,7 @@
             </td>
         </tr>
       </tbody>
-    </table>
+    </table>-->
 
     <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#modalContacto">
         Agregar
@@ -59,7 +56,7 @@
                       <p class="card-text">Telefono: {{contacto.telefono}}</p>
                   <div class="formGroup">
                     <button (click)="eliminar(contacto.idContacto)" class="btn btn-danger" name="eliminar">Eliminar</button>
-                    <button class="btn btn-primary"  name="editar">Editar</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalContactoEditar" (click)="editarContacto(contacto.idContacto)" name="editar">Editar</button>
                 </div>
               </div>
             </div>
@@ -110,9 +107,60 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="submit" onclick="location.href = 'http://localhost:4200/dashboard/contacto';" class="btn btn-primary">Guardar</button>
+          <button type="submit" [hidden]="hideModal" class="btn btn-primary">Guardar</button>
         </div>
       </div>
     </form>
   </div>
 </div>
+
+
+
+
+<!--Editar
+
+
+<div class="modal fade bd-example-modal-lg" id="modalContactoEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <form [formGroup]="formularioEditar"  (ngSubmit)="editarContacto()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Actualizar Contacto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group ">
+            <label for="idUsuario" >Usuario</label>
+              <input type="text" class="form-control" id="idUsuario" [(ngModel)]="formularioUpdate.idUsuario" formControlName="idUsuario">
+          </div>
+          <div class="form-group ">
+            <label for="nombre" >Nombre</label>
+              <input type="text" class="form-control" id="nombre" [(ngModel)]="formularioUpdate.nombre" formControlName="nombre">
+          </div>
+            <div class="form-group ">
+            <label for="apellido" >Apellido</label>
+              <input type="text" class="form-control" id="apellido" [(ngModel)]="formularioUpdate.apellido" formControlName="apellido">
+          </div>
+            <div class="form-group ">
+            <label for="telefono" >Telefono</label>
+              <input type="text" class="form-control" id="telefono" [(ngModel)]="formularioUpdate.telefono" formControlName="telefono">
+          </div>
+            <div class="form-group ">
+            <label for="direccion" >Direccion</label>
+              <input type="text" class="form-control" id="direccion" [(ngModel)]="formularioUpdate.direccion" formControlName="direccion">
+          </div>
+            <div class="form-group ">
+            <label for="idCategoria" >Categoria</label>
+              <input type="text" class="form-control" id="idCategoria" [(ngModel)]="formularioUpdate.idCategoria" formControlName="idCategoria">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" [hidden]="hideModal" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>-->

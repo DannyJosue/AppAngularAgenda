@@ -40,12 +40,6 @@ export class UsuarioService {
     });
   }
 
-  public setToken(token:string) {
-    if(localStorage.getItem('token') != token) {
-      localStorage.removeItem('token');
-      localStorage.setItem('token', token);
-    }
-  }
 
   public setCurrentUser(usuario:any) {
     localStorage.setItem('currentUser', usuario);
@@ -73,6 +67,12 @@ export class UsuarioService {
       });
   }
 
+  public setToken(token:string) {
+    if(localStorage.getItem('token') != token) {
+      localStorage.removeItem('token');
+      localStorage.setItem('token', token);
+    }
+  }
   public getToken():string {
     return localStorage.getItem('token');
   }

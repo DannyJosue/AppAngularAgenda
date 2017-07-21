@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CategoriaService } from '../../../services/categoria.service';
 
+declare var $:any;
+
 @Component({
   selector: 'app-categoria',
   templateUrl: 'categoria.component.html',
@@ -11,6 +13,7 @@ export class CategoriaComponent implements OnInit {
   constructor(private categoriaService: CategoriaService) {  }
     formularioCategoria:FormGroup;
     formularioUpdate:FormGroup;
+    hideModal: boolean= false;
 
   ngOnInit() {
     let validaciones = [
@@ -29,6 +32,7 @@ export class CategoriaComponent implements OnInit {
     this.categoriaService.agregarCategoria(this.formularioCategoria.value)
     this.categoriaService.getCategorias().subscribe();
     this.ngOnInit();
+    $('#modalCategoria').modal('hide');
   }
 
   public eliminar(idCategoria:number) {
