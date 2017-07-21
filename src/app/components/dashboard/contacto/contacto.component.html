@@ -1,0 +1,118 @@
+<div class="row">
+  <div class="page-header">
+    <h1>Contacto</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <button onclick="showTable('#tbl');" class="btn btn-success">Mostrar tabla</button><br><br><br>
+    </div>
+    <table class="table table-hover" id="tbl" >
+      <thead>
+        <tr>
+          <th>idContacto</th>
+          <th>Usuario</th>
+          <th>Contacto</th>
+          <th>Apellido</th>
+          <th>Telefono</th>
+          <th>Direccion</th>
+          <th>Categoria</th>
+          <th>opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contacto of contactoService.contactos">
+            <td>{{ contacto.idContacto }}</td>
+            <td>{{ contacto.nick }}</td>
+            <td>{{ contacto.nombre }}</td>
+            <td>{{ contacto.apellido }}</td>
+            <td>{{ contacto.telefono }}</td>
+            <td>{{ contacto.direccion }}</td>
+            <td>{{ contacto.nombreCategoria }}</td>
+            <td>
+                <div class="formGroup">
+                    <button (click)="eliminar(contacto.idContacto)" class="btn btn-danger" name="eliminar">Eliminar</button>
+                    <button></button>
+                </div>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#modalContacto">
+        Agregar
+    </button>                                                                                                                                                                                                                                                                                                                                                                                           <br><br><br><br><br>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4" align="center" *ngFor="let contacto of contactoService.contactos" >
+            <div class="card text-xs-left">
+                  <img class="card-img-center" style="width: 15rem;" src="http://images.iimg.in/c/569f4771c45d324bda8b4660-4-501-0-1453279096/google/user-icon-png-pnglogocom.img?crop=1" alt="Card image cap">
+                    <div class="card-block">
+                      <h4 align="center">Contacto: </h4>
+                      <h4 class="card-title" align="center"> {{ contacto.nombre + " " + contacto.apellido}}</h4>
+                      <p class="card-text">Telefono: {{contacto.telefono}}</p>
+                      <p class="card-text">Direccion: {{contacto.direccion}}</p>
+                      <p class="card-text">Telefono: {{contacto.telefono}}</p>
+                  <div class="formGroup">
+                    <button (click)="eliminar(contacto.idContacto)" class="btn btn-danger" name="eliminar">Eliminar</button>
+                    <button class="btn btn-primary"  name="editar">Editar</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade bd-example-modal-lg" id="modalContacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <form [formGroup]="formularioContacto" (ngSubmit)="agregarContacto()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Contacto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group ">
+            <label for="idUsuario" >Usuario</label>
+              <input type="text" class="form-control" id="idUsuario" placeholder="ingrese su usuario" formControlName="idUsuario">
+          </div>
+          <div class="form-group ">
+            <label for="nombre" >Nombre</label>
+              <input type="text" class="form-control" id="nombre" placeholder="ingrese su nombre" formControlName="nombre">
+          </div>
+            <div class="form-group ">
+            <label for="apellido" >Apellido</label>
+              <input type="text" class="form-control" id="apellido" placeholder="ingrese su apellido" formControlName="apellido">
+          </div>
+            <div class="form-group ">
+            <label for="telefono" >Telefono</label>
+              <input type="text" class="form-control" id="telefono" placeholder="ingrese su telefono" formControlName="telefono">
+          </div>
+            <div class="form-group ">
+            <label for="direccion" >Direccion</label>
+              <input type="text" class="form-control" id="direccion" placeholder="ingrese su direccion" formControlName="direccion">
+          </div>
+            <div class="form-group ">
+            <label for="idCategoria" >Categoria</label>
+              <input type="text" class="form-control" id="idCategoria" placeholder="ingrese su categoria" formControlName="idCategoria">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" onclick="location.href = 'http://localhost:4200/dashboard/contacto';" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

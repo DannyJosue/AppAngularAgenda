@@ -1,0 +1,66 @@
+
+<div class="row">
+  <div class="page-header">
+    <h1>Usuario</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Lista usuarios</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>idUsuario</th>
+          <th>Usuario</th>
+          <th>Contraseña</th>
+          <th>opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of usuarioService.usuarios">
+            <td>{{ s.idUsuario }}</td>
+            <td>{{ s.nick }}</td>
+            <td>{{ s.contrasena }}</td>
+            <td>
+                <div class="formGroup">
+                    <button (click)="eliminar(s.idUsuario)" class="btn btn-danger" name="eliminar">Eliminar</button>
+                </div>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#modalUsuario">
+        Agregar
+    </button>
+
+  
+<div class="modal fade bd-example-modal-lg" id="modalUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <form [formGroup]="nuevoUsuario" (ngSubmit)="agregarUsuario()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar Usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group ">
+            <label for="nick" >Nick</label>
+              <input type="text" class="form-control" id="nick" placeholder="ingrese su nick" formControlName="nick">
+          </div>
+          <div class="form-group">
+            <label for="contrasena">Contraseña</label>
+              <input type="password" class="form-control" id="contrasena" placeholder="ingrese su contraseña" formControlName="contrasena">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit"  class="btn btn-primary" >Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
